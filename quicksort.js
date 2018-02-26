@@ -1,4 +1,4 @@
-function quickSort(numbers) {
+function quickSort(numbers, order) {
 
     if (numbers.length <= 1) {
         return numbers;
@@ -11,14 +11,20 @@ function quickSort(numbers) {
         var numbersLength = numbers.length;
 
         for (var a = 0; a < numbersLength; a++) {
-            if (numbers[a] <= pivot) {
-                leftArray.push(numbers[a]);
-            } else {
-                rightArray.push(numbers[a]);
+            if (order === 'ascending') {
+                if (numbers[a] <= pivot) {
+                    leftArray.push(numbers[a]);
+                } else {
+                    rightArray.push(numbers[a]);
+                }
+            } else if (order === 'descending') {
+                if (numbers[a] >= pivot) {
+                    leftArray.push(numbers[a]);
+                } else {
+                    rightArray.push(numbers[a]);
+                }
             }
         }
-        return newNumbers.concat(quickSort(leftArray), pivot, quickSort(rightArray));
+        return newNumbers.concat(quickSort(leftArray, order), pivot, quickSort(rightArray, order));
     }
 }
-
-console.log(quickSort([5,3,2,0,1,4]));
